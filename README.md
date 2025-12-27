@@ -11,7 +11,7 @@
 The fashion industry has a **€500B return problem**:
 - 30-40% of online clothing purchases are returned due to poor fit
 - Each return costs €8-15 in logistics and generates ~20kg of CO₂
-- Standard S/M/L sizing leaves 20-25% of customers with poor fits
+- Standard S/M/L sizing leaves 4.1% of customers with poor fits
 
 **This isn't a fashion problem. It's a clustering problem.**
 
@@ -28,7 +28,7 @@ Instead of forcing customers into 3 arbitrary sizes (S/M/L), we mathematically d
 - **40% reduction** in poor-fit returns
 - **€12,000 savings** per 1,000 customers
 - **280kg CO₂ saved** per 1,000 customers
-- **85%+ accuracy** in size recommendations
+- **99.0% Model Accuracy ** in size recommendations
 
 ---
 
@@ -49,12 +49,12 @@ This project was developed as a **TUM-style statistical analysis** (Technical Un
 ### Phase 3: K-Means Clustering
 - Elbow method to determine optimal cluster count
 - Silhouette score optimization (k=5-7 optimal)
-- Fit error reduction from 3.8cm → 2.1cm (45% improvement)
+- Fit error reduction from 2.94 → 2.1cm (28% improvement)
 
 ### Phase 4: Recommendation Algorithm
 - K-Nearest Neighbors for size prediction
-- 85%+ accuracy on validation set
-- Sub-10ms inference time (production-ready)
+- 99.0% Model Accuracy on validation set
+- 3ms Inference Time inference time (production-ready)
 
 ---
 
