@@ -75,7 +75,10 @@ pip install -r requirements.txt
 
 ```bash
 # Execute notebook
-jupyter notebook MASTER_sustainable_sizing.ipynb
+jupyter notebook 01_data_generation.ipynb
+jupyter notebook 02_eda_correlation.ipynb
+jupyter notebook 03_kmeans_clustering.ipynb
+jupyter notebook 04_sizing_recommendation_algorithm.ipynb
 ```
 
 ### Use the Recommendation Engine
