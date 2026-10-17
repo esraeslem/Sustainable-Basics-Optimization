@@ -18,10 +18,7 @@ seaborn>=0.12.0
 jupyter>=1.0.0
 ipykernel>=6.22.0
 
-# Model Serialization
-pickle5>=0.0.11
-
-# Optional: Production Deployment
+# Optional: API deployment
 # flask>=2.3.0
 # fastapi>=0.95.0
 # uvicorn>=0.22.0

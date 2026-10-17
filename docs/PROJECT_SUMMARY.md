@@ -3,13 +3,13 @@
 **Author:** Esra Eslem Savaş  
 **Institution:** Middle East Technical University (METU)  
 **Date:** December 2024  
-**Status:** Prototype Complete
+**Status:** Research prototype (simulated data)
 
 ---
 
 ## Executive Summary
 
-This project applies statistical clustering algorithms to solve the fashion industry's €500B returns problem. By treating body measurements as multivariate distributions and using K-Means clustering, we discovered that optimizing from 3 standard sizes (S/M/L) to 5-7 data-driven sizes reduces returns by 40% while cutting 14.6 tons of CO₂ emissions annually per 10,000 customers.
+Simulation study: on 1,000 simulated customers (multivariate normal, ANSUR II-based parameters), replacing 3 standard sizes (S/M/L) with 5 K-Means-derived sizes reduces mean fit error by 28% (2.94 → 2.1 cm). Return-cost and CO₂ figures in this document are illustrative estimates based on industry assumptions, not measurements.
 
 ---
 
@@ -20,13 +20,8 @@ This project applies statistical clustering algorithms to solve the fashion indu
 - Primary reason: **Poor fit** (standard S/M/L doesn't capture body diversity)
 - **Cost per return:** €8-15 in logistics
 - **Environmental cost:** ~20kg CO₂ per return
-- **Standard sizing poor fit rate:** 23.5%
+- **Standard sizing poor fit rate (simulation, >6 cm error):** 4.1%
 
-### Financial Impact
-For a brand selling 10,000 items annually:
-- **Lost revenue:** €180,000-€366,000
-- **Return processing costs:** €132,000
-- **CO₂ emissions:** 33 metric tons
 
 ---
 
@@ -58,8 +53,8 @@ Instead of arbitrary size boundaries, we:
 
 **Validation:**
 - 80/20 train-test split (800/200 customers)
-- Recommendation accuracy: **99.0%**
-- Average inference time: **<3ms** (production-ready)
+- Recommendation accuracy: **99.0%** on simulated data. The size labels are the K-Means clusters built from the same measurements, so high accuracy is expected.
+- ~3 ms per prediction on a laptop
 
 ---
 
@@ -71,21 +66,17 @@ Instead of arbitrary size boundaries, we:
 |--------|-------------------|---------------------|-------------|
 | Mean Fit Error | 2.94 cm | 2.1 cm | **28%** ↓ |
 | Poor Fit Rate | 4.1% | 2.5% | **39%** ↓ |
-| Returns (per 1K) | 29 | 18 | **38%** ↓ |
+| Returns per 1K *(illustrative est.)* | 29 | 18 | 38% ↓ |
 
-### Business Impact (Per 10,000 Customers)
+### Illustrative Business Impact (per 10,000 customers)
+
+*Assumes poor fit drives returns, €8–15 cost and ~20 kg CO₂ per return. Not validated on real data.*
 
 **Financial:**
-- Cost savings: **€68,200** annually
-- Additional pattern costs: **€1,000** (one-time)
-- ROI: **6,720%** in first year
-- Break-even: **147 customers**
+- Estimated return-cost savings: ~€68,200 per year
 
 **Environmental:**
-- CO₂ reduction: **2,200 kg** (2.2 tons)
-- Equivalent to: 
-  - 5,000 km of car travel avoided
-  - 270 trees planted
+- Estimated CO₂ reduction from fewer returns: ~2.2 t
 
 **Customer Experience:**
 - Return rate reduction: 38%
@@ -119,8 +110,8 @@ Instead of arbitrary size boundaries, we:
 3. `03_kmeans_clustering.ipynb` - Clustering optimization
 4. `04_sizing_recommendation_algorithm.ipynb` - ML model training
 
-### Production Assets
-- `size_recommender.py` - Production-ready recommendation engine
+### Code Assets
+- `size_recommender.py` - Recommender module (prototype)
 - `size_recommendation_model.pkl` - Trained KNN model
 - `size_guide.csv` - Customer-facing size chart
 
@@ -171,14 +162,7 @@ subject to: Σₖ wᵢₖ = 1 ∀i, wᵢₖ ∈ {0,1}
 ✅ **Machine Learning:** Unsupervised (K-Means) + Supervised (KNN)  
 ✅ **Data Science:** EDA, outlier detection, dimensionality reduction  
 ✅ **Business Analytics:** ROI analysis, cost-benefit modeling  
-✅ **Software Engineering:** Modular code, production deployment  
-
-### TUM Project Week Alignment
-This project follows the Technical University of Munich's Project Week methodology:
-- Week 1: Data investigation and hypothesis formation
-- Week 2: Statistical modeling and validation
-- Week 3: Algorithm development
-- Week 4: Production deployment and documentation
+✅ **Software Engineering:** Modular code  
 
 ---
 
@@ -209,13 +193,11 @@ This project follows the Technical University of Munich's Project Week methodolo
 ## Business Applications
 
 ### For Fashion Brands
-- **Direct Use:** Implement this sizing system immediately
-- **Cost Savings:** Reduce return logistics costs by 40%
+- **Next step:** Validate on real body-scan and return data before any rollout
 - **Sustainability:** Measurable CO₂ reduction for ESG reporting
 
 ### For Tech Startups
 - **SaaS Opportunity:** "Sizing-as-a-Service" API
-- **Market Size:** €500B+ addressable market
 - **Integration:** Plug-and-play widget for any e-commerce site
 
 ### For Retail Platforms
@@ -230,8 +212,8 @@ This project follows the Technical University of Munich's Project Week methodolo
 ### For Recruiters/Employers
 This project demonstrates:
 - End-to-end data science workflow
-- Business acumen (ROI calculation, market sizing)
-- Production-ready code (not just notebooks)
+- Translating a statistical result into business terms, with stated assumptions
+- A reusable recommender class alongside the notebooks
 - Clear documentation and presentation
 
 ### For Researchers
@@ -270,7 +252,7 @@ This project demonstrates:
 **Esra Eslem Savaş**  
 Statistics Student, METU  
 📧 eslem.savas@metu.edu.tr  
-💼 [LinkedIn](https://linkedin.com/in/esraeslemsavas)  
+💼 [LinkedIn](https://www.linkedin.com/in/esra-eslem-savas-b49980247)  
 🔗 [GitHub](https://github.com/esraeslem)
 
 **Open to:**
@@ -294,7 +276,6 @@ This project is open-source and free to use for:
 
 ## Acknowledgments
 
-- **Methodology:** Inspired by TUM Applied Statistics curriculum
 - **Problem Domain:** Ellen MacArthur Foundation sustainability research
 - **Technical Support:** Open-source data science community
 

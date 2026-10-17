@@ -68,33 +68,34 @@
     <!-- Hero: The Decision (Layer 1 - Always Visible) -->
     <section class="gradient-bg text-white py-32">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="text-sm uppercase tracking-wide text-purple-200 mb-4">Statistical Sizing System</div>
+            <div class="text-sm uppercase tracking-wide text-purple-200 mb-4">Simulation Study · Research Prototype</div>
             
             <h1 class="text-6xl font-bold mb-8 leading-tight">
-                39% Fewer Returns<br/>
+                28% Lower Fit Error<br/>
                 Using 5 Sizes Instead of 3
             </h1>
             
             <p class="text-2xl text-purple-100 mb-6">
-                Break-even: 147 customers
+                Mean fit error 2.94 cm → 2.1 cm on 1,000 simulated customers
             </p>
             
             <div class="inline-block bg-white/10 backdrop-blur-lg rounded-lg px-8 py-6 border border-white/20 mb-12">
-                <div class="text-xl font-semibold mb-4">Immediate Impact</div>
+                <div class="text-xl font-semibold mb-4">Illustrative Estimates</div>
                 <div class="grid grid-cols-3 gap-8 text-center">
                     <div>
                         <div class="text-4xl font-bold mb-1">€68,200</div>
-                        <div class="text-sm text-purple-100">Annual savings<br/>per 10K customers</div>
+                        <div class="text-sm text-purple-100">Est. return-cost savings<br/>per 10K customers*</div>
                     </div>
                     <div>
                         <div class="text-4xl font-bold mb-1">2.2 tons</div>
-                        <div class="text-sm text-purple-100">CO₂ eliminated<br/>per 10K customers</div>
+                        <div class="text-sm text-purple-100">Est. CO₂ from returns<br/>per 10K customers*</div>
                     </div>
                     <div>
-                        <div class="text-4xl font-bold mb-1">&lt;3ms</div>
-                        <div class="text-sm text-purple-100">Response time<br/>production-ready</div>
+                        <div class="text-4xl font-bold mb-1">~3ms</div>
+                        <div class="text-sm text-purple-100">Per prediction<br/>(laptop)</div>
                     </div>
                 </div>
+                <div class="text-xs text-purple-200 mt-4">*Assumes €8–15 and ~20 kg CO₂ per return; not validated on real return data.</div>
             </div>
             
             <div class="flex justify-center space-x-4">
@@ -173,8 +174,8 @@
                     <div>
                         <div class="font-semibold text-blue-900 mb-3">Technical Performance</div>
                         <ul class="space-y-2 text-gray-700">
-                            <li>✓ &lt;3ms inference time</li>
-                            <li>✓ 99% cluster assignment confidence</li>
+                            <li>✓ ~3ms per prediction</li>
+                            <li>✓ 99% label accuracy (simulated data)</li>
                             <li>✓ 20K predictions/second capacity</li>
                             <li>✓ Single commodity server</li>
                         </ul>
@@ -205,7 +206,7 @@
                                 <ul class="space-y-2 text-sm text-gray-700">
                                     <li><strong>K-Means over deep learning:</strong> Explainable for merchandising teams, deterministic results</li>
                                     <li><strong>5-7 size limit:</strong> Balances accuracy with inventory complexity (vs. theoretical optimum of 15+)</li>
-                                    <li><strong>Speed prioritized:</strong> Chose &lt;3ms inference over marginal accuracy gains for production deployment</li>
+                                    <li><strong>Speed prioritized:</strong> Chose a fast, simple KNN over marginal accuracy gains</li>
                                 </ul>
                             </div>
                         </div>
@@ -217,7 +218,7 @@
                         
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Validation</h3>
-                            <p class="text-gray-700">80/20 train-test split. Model achieves 99% cluster assignment confidence on 200-customer validation set. Silhouette score optimization confirms k=5-7 as optimal balance.</p>
+                            <p class="text-gray-700">80/20 train-test split. Model reproduces the K-Means size labels with 99% accuracy on a 200-customer hold-out (expected, since the labels come from the same measurements). Silhouette score optimization confirms k=5-7 as optimal balance.</p>
                         </div>
                     </div>
                 </div>
@@ -259,16 +260,10 @@
                             <td class="px-6 py-4 font-bold text-green-600">28% ↓</td>
                         </tr>
                         <tr>
-                            <td class="px-6 py-4 font-medium text-gray-900">Annual Cost (per 10K)</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Return Cost per 10K (illustrative est.)</td>
                             <td class="px-6 py-4 text-gray-700">€179,800</td>
                             <td class="px-6 py-4 text-gray-700">€111,600</td>
-                            <td class="px-6 py-4 font-bold text-green-600">€68,200 saved</td>
-                        </tr>
-                        <tr class="bg-purple-50">
-                            <td class="px-6 py-4 font-bold text-gray-900">ROI</td>
-                            <td class="px-6 py-4 text-gray-700">—</td>
-                            <td class="px-6 py-4 text-gray-700">6,720%</td>
-                            <td class="px-6 py-4 font-bold text-purple-700">First year</td>
+                            <td class="px-6 py-4 font-bold text-green-600">€68,200 (est.)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -289,42 +284,6 @@
                 </div>
             </div>
             
-            <!-- Scalability -->
-            <div class="bg-white rounded-lg p-8 shadow-sm border border-gray-200">
-                <h3 class="text-2xl font-bold mb-6 text-gray-900">Scale Economics</h3>
-                <div class="grid md:grid-cols-3 gap-6 text-center">
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <div class="text-3xl font-bold text-gray-900 mb-2">100K</div>
-                        <div class="text-sm text-gray-600 mb-4">customers annually</div>
-                        <div class="text-left space-y-1 text-sm">
-                            <div class="text-gray-700">• €682K savings</div>
-                            <div class="text-gray-700">• 22 tons CO₂ reduction</div>
-                            <div class="text-gray-700">• Break-even: 11 days</div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 bg-purple-50 rounded-lg border-2 border-purple-200">
-                        <div class="text-3xl font-bold text-purple-900 mb-2">1M</div>
-                        <div class="text-sm text-purple-700 mb-4">mid-size brand</div>
-                        <div class="text-left space-y-1 text-sm">
-                            <div class="text-gray-700">• €6.82M savings</div>
-                            <div class="text-gray-700">• 220 tons CO₂ reduction</div>
-                            <div class="text-gray-700">• = 48 cars off road</div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6 bg-gray-50 rounded-lg">
-                        <div class="text-3xl font-bold text-gray-900 mb-2">10M+</div>
-                        <div class="text-sm text-gray-600 mb-4">enterprise scale</div>
-                        <div class="text-left space-y-1 text-sm">
-                            <div class="text-gray-700">• €68M+ savings</div>
-                            <div class="text-gray-700">• 2,200 tons CO₂</div>
-                            <div class="text-gray-700">• Industry transformation</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Layer 2: Full Context (Expandable) -->
             <div class="mt-8 border border-gray-200 rounded-lg overflow-hidden">
                 <button onclick="toggleSection('context')" 
@@ -335,11 +294,11 @@
                 <div id="context" class="expandable-content bg-white">
                     <div class="px-6 py-6 space-y-6">
                         <div>
-                            <h3 class="font-semibold text-gray-900 mb-3">The €500 Billion Problem</h3>
+                            <h3 class="font-semibold text-gray-900 mb-3">The Return Problem</h3>
                             <p class="text-gray-700 mb-4">30-40% of online fashion purchases are returned, with poor fit as the primary driver. Each return costs €8-15 in logistics and generates ~20kg of CO₂.</p>
                             
                             <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r p-4 mb-4">
-                                <p class="text-sm text-amber-900"><strong>Emissions clarification:</strong> Baseline assumes ~20kg CO₂ per return. Optimized system reduces return volume by 38%, resulting in net reduction of ~2.2 tons CO₂ per 10,000 customers (from 33 ton baseline).</p>
+                                <p class="text-sm text-amber-900"><strong>Emissions clarification:</strong> Baseline assumes ~20kg CO₂ per return. In the simulation, poor-fit returns fall by ~38%, which under this assumption gives an illustrative reduction of ~2.2 t CO₂ per 10,000 customers (from a ~5.8 t baseline). Not validated on real return data.</p>
                             </div>
                         </div>
                         
@@ -439,7 +398,7 @@
             
             <div class="mt-8 text-center text-sm text-gray-600">
                 <p class="mb-2">Try: Small (88/40/64), Medium (98/44/68), Large (108/48/72)</p>
-                <p>Response time: &lt;3ms (production-ready)</p>
+                <p>Research prototype · simulated data</p>
             </div>
         </div>
     </section>
@@ -486,7 +445,7 @@
                    class="bg-white text-purple-600 font-semibold px-8 py-3 rounded-lg hover:bg-purple-50 transition-colors">
                     View Full Code →
                 </a>
-                <a href="https://linkedin.com/in/esraeslemsavas" target="_blank"
+                <a href="https://www.linkedin.com/in/esra-eslem-savas-b49980247" target="_blank"
                    class="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white/10 transition-colors">
                     Connect on LinkedIn
                 </a>
@@ -518,7 +477,7 @@
                     <div class="text-white font-semibold mb-4">Contact</div>
                     <div class="space-y-2 text-sm">
                         <a href="mailto:eslem.savas@metu.edu.tr" class="block hover:text-white">eslem.savas@metu.edu.tr</a>
-                        <a href="https://linkedin.com/in/esraeslemsavas" target="_blank" class="block hover:text-white">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/esra-eslem-savas-b49980247" target="_blank" class="block hover:text-white">LinkedIn</a>
                     </div>
                 </div>
             </div>

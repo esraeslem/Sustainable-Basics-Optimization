@@ -1,6 +1,6 @@
 """
 Size Recommendation Engine
-Production-ready module for Sustainable Basics sizing optimization.
+Prototype module for Sustainable Basics sizing optimization (trained on simulated data).
 
 Author: Esra Eslem Savaş
 Date: December 2024
@@ -15,7 +15,7 @@ from typing import Dict, Tuple, Optional
 
 class SizeRecommender:
     """
-    Production-ready size recommendation system.
+    Prototype size recommendation system (trained on simulated data).
     
     Uses K-Nearest Neighbors to recommend optimal clothing sizes based on
     body measurements (chest, shoulder, torso).

@@ -2,9 +2,11 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen.svg)](https://github.com/esraeslem/Sustainable-Basics-Optimization)
+[![Status](https://img.shields.io/badge/Status-Research_Prototype-orange.svg)](https://github.com/esraeslem/Sustainable-Basics-Optimization)
 
-> **Using statistical clustering to reduce fashion returns by 40% while cutting CO₂ emissions by 14 tons annually**
+> **Simulation study: K-Means sizing reduces mean fit error by 28% (2.94 → 2.1 cm)**
+>
+> All results below come from **1,000 simulated customers** (multivariate normal, parameters based on ANSUR II). No real customer, sales or return data was used.
 
 ![Fit Gap Analysis](./visualizations/day1_fit_gap_analysis.png)
 
@@ -12,10 +14,10 @@
 
 ## 🎯 The Problem
 
-The fashion industry has a **€500B return problem**:
+Online fashion has a costly return problem:
 - 30-40% of online clothing purchases are returned due to poor fit
 - Each return costs €8-15 in logistics and generates ~20kg of CO₂
-- Standard S/M/L sizing leaves **4.1%** of customers with poor fits
+- In this simulation, standard S/M/L sizing leaves **4.1%** of customers with poor fits
 
 **This isn't a fashion problem. It's a clustering problem.**
 
@@ -28,18 +30,17 @@ We treat human body measurements as a **multivariate normal distribution** and u
 ### Key Innovation
 Instead of forcing customers into 3 arbitrary sizes (S/M/L), we mathematically determine the optimal number of sizes (typically 5-7) that maximize coverage while minimizing inventory complexity.
 
-### Results
-- **38% reduction** in poor-fit returns
-- **€68,200 savings** per 10,000 customers annually
-- **2.2 tons CO₂ saved** per 10,000 customers
-- **99.0% accuracy** in size recommendations
-- **<3ms inference time** (production-ready)
+### Results (on simulated data)
+- **Mean fit error: 2.94 cm → 2.1 cm (−28%)** — the core result, computed directly from the simulation
+- **Poor-fit rate: 4.1% → 2.5%** under the simulation's fit threshold (>6 cm error)
+- **99.0% size-assignment accuracy** on a 200-customer hold-out. Note: the size labels are the K-Means clusters built from the same three measurements the KNN uses, so near-perfect accuracy is expected; it shows the recommender reproduces the clustering, not real-world fit.
+- Return-cost and CO₂ figures further down are **illustrative estimates** built on industry assumptions, not measurements.
 
 ---
 
 ## 📊 Project Overview
 
-This project was developed using **TUM-style statistical analysis** (Technical University of Munich methodology) with four phases:
+The project has four phases:
 
 ### Phase 1: Data Generation
 - Simulated 1,000 customers using multivariate normal distributions
@@ -58,8 +59,8 @@ This project was developed using **TUM-style statistical analysis** (Technical U
 
 ### Phase 4: Recommendation Algorithm
 - K-Nearest Neighbors for size prediction
-- **99.0% accuracy** on validation set (200 customers)
-- **3ms inference time** (production-ready)
+- 99.0% accuracy on a 200-customer hold-out (simulated data; see note above)
+- ~3 ms per prediction on a laptop
 
 ---
 
@@ -78,6 +79,8 @@ pip install -r requirements.txt
 
 ### Run the Analysis
 
+The notebooks were written in Google Colab. To run them locally, skip the `google.colab` cells and point file paths to `data/`.
+
 ```bash
 # Execute all notebooks in sequence
 jupyter notebook notebooks/01_data_generation.ipynb
@@ -87,6 +90,8 @@ jupyter notebook notebooks/04_sizing_recommendation_algorithm.ipynb
 ```
 
 ### Use the Recommendation Engine
+
+The trained model is not committed. Run notebook 04 first and save `size_recommendation_model.pkl` into a `models/` folder.
 
 ```python
 from src.size_recommender import SizeRecommender
@@ -128,15 +133,10 @@ Sustainable-Basics-Optimization/
 │   └── 04_sizing_recommendation_algorithm.ipynb  # ML model training
 │
 ├── data/                               # Generated datasets
-│   ├── processed/
-│   │   └── anthropometric_data_final.csv  # Final dataset with clusters
-│   └── size_guide.csv                  # Customer-facing size chart
+│   └── processed/
+│       └── anthropometric_data_final.csv  # Simulated dataset with clusters
 │
-├── models/                             # Trained models
-│   └── size_recommendation_model.pkl   # Serialized KNN model
-│
-├── src/                                # Production code
-│   ├── __init__.py
+├── src/                                # Recommender module
 │   └── size_recommender.py            # Recommendation engine API
 │
 ├── visualizations/                     # Generated plots
@@ -173,23 +173,19 @@ Sustainable-Basics-Optimization/
 3. **Optimal Cluster Count**
    - Silhouette analysis identifies **k=5** as optimal
    - 28% error reduction with only 2 additional SKUs
-   - ROI positive after ~147 customers
 
-### Business Impact (Per 10,000 Customers)
+### Illustrative Business Impact (per 10,000 customers)
+
+*Fit-error and poor-fit rows are computed on the simulated data. Return, cost and CO₂ rows are illustrative estimates that assume poor fit drives returns, €8–15 logistics cost and ~20 kg CO₂ per return. They have not been validated on real returns.*
 
 | Metric | Standard (S/M/L) | Optimized (5 sizes) | Improvement |
 |--------|------------------|---------------------|-------------|
 | Mean Fit Error | 2.94 cm | 2.1 cm | **28%** ↓ |
 | Poor Fit Rate | 4.1% | 2.5% | **39%** ↓ |
-| Expected Returns | 29 per 1K | 18 per 1K | **38%** ↓ |
-| Annual Cost | €179,800 | €111,600 | **€68,200 saved** |
-| CO₂ Emissions | 5,800 kg | 3,600 kg | **2.2 tons saved** |
+| Expected Returns *(est.)* | 29 per 1K | 18 per 1K | 38% ↓ |
+| Annual Return Cost *(est.)* | €179,800 | €111,600 | €68,200 |
+| CO₂ from Returns *(est.)* | 5,800 kg | 3,600 kg | 2.2 t |
 
-**Annual Impact:**
-- Revenue preserved: **€366,000**
-- Return cost savings: **€132,000**
-- CO₂ reduction: **14.6 tons** (equivalent to 270 trees planted)
-- Customer satisfaction: **+18%** (fewer bad experiences)
 
 ---
 
@@ -247,13 +243,12 @@ This project demonstrates:
 ✅ **Dimensionality Reduction** - PCA for variance understanding  
 ✅ **Machine Learning** - Supervised (KNN) + Unsupervised (K-Means)  
 ✅ **Business Analytics** - ROI calculation, cost-benefit analysis  
-✅ **Software Engineering** - Production-ready deployment, modular design
+✅ **Software Engineering** - Modular code, reusable recommender class
 
 **Skills Showcased:**
 - Statistical modeling (multivariate distributions)
 - Unsupervised learning (clustering)
 - Model evaluation (silhouette, Davies-Bouldin)
-- Production deployment (API design)
 - Data storytelling (visualization)
 
 ---
@@ -307,7 +302,6 @@ Contributions welcome! Priority areas:
 3. **Features:** Adding weight, height, age as predictive variables
 4. **Validation:** Real-world return rate studies
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ---
 
@@ -334,10 +328,8 @@ Statistics Student | Middle East Technical University (METU)
 
 ## 🙏 Acknowledgments
 
-- **Methodology:** Inspired by TUM Applied Statistics curriculum
 - **Data:** ANSUR II (US Army Anthropometric Survey)
 - **Sustainability Metrics:** Ellen MacArthur Foundation
-- **Statistical Framework:** Based on TUM coursework
 
 ---
 
