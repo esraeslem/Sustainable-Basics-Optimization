@@ -322,7 +322,6 @@ Statistics Student | Middle East Technical University (METU)
 🔗 [GitHub](https://github.com/esraeslem)
 [Website](https://sustainablebasicsoptimization.vercel.app/)
 
-*Built as part of TUM Project Week 2024*
 
 ---
 
